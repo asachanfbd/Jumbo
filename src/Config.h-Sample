@@ -1,13 +1,12 @@
-// Rename this file to Config.h
 #ifndef CONFIG_H
 #define CONFIG_H
 
 // WiFi Credentials
-const char *WIFI_SSID = "";
-const char *WIFI_PASSWORD = "";
+const char *WIFI_SSID = "Your_WiFi_SSID";
+const char *WIFI_PASSWORD = "Your_WiFi_Password";
 
 // API Configuration
-const char *API_URL = "http://192.168.1.44:8000/jumbo-ai/brain";
+const char *API_URL = "http://your-server-ip:8000/jumbo-ai/brain";
 const char *API_TOKEN = "YOUR_BEARER_TOKEN";
 
 // Messages
