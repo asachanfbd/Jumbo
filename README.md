@@ -2,6 +2,8 @@
 
 Jumbo is an IoT-enabled smart display based on the ESP8266 (NodeMCU). It brings a personality to your desk by displaying animated facial expressions ("Eyes") and text messages fetched from a remote API. It also features sound feedback using an active buzzer and a power-saving standby mode.
 
+This project covers the firmware for the device. The intelligence and control logic are handled by the [Jumbo Server](https://github.com/asachanfbd/Jumbo-Server).
+
 ## Features
 
 - **Animated Eyes**: Expressive eye animations (Happy, Sad, Shocked, Sleep, etc.) displayed on an OLED screen.
@@ -61,7 +63,10 @@ Connect the components as follows:
     - Copy `src/Config.h-Sample` to `src/Config.h`.
     - Open `src/Config.h` and update the settings with your own WiFi and API details.
     
-    *Note: `src/Config.h` is ignored by git to keep your credentials safe.*
+    ```
+
+3.  **Setup Backend**:
+    Ensure you have the [Jumbo Backend Server](https://github.com/asachanfbd/Jumbo-Server) set up and running. The `API_URL` above should point to your running server instance.
 
 ## Flashing the Code
 
