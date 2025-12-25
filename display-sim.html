@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vyanjika Robot Face Simulator</title>
+    <style>
+        body { background: #333; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        /* Scale the canvas up 4x so it's easy to see on your monitor */
+        canvas { border: 2px solid #666; image-rendering: pixelated; width: 512px; height: 256px; background: black; }
+        .controls { margin-top: 20px; }
+        label { margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <h2>OLED Design Simulator (128x64)</h2>
+    <canvas id="oled" width="128" height="64"></canvas>
+    
+    <div class="controls">
+        <p>Tweak these variables in the script tag below to adjust the face!</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('oled');
+        const ctx = canvas.getContext('2d');
+
+        // --- C++ MAPPING HELPER FUNCTIONS ---
+        // These mimic the Adafruit GFX library so you can just copy logic
+        const SSD1306_WHITE = "white";
+        const SSD1306_BLACK = "black";
+
+        function fillCircle(x, y, r, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        function drawCircle(x, y, r, color) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        function fillRect(x, y, w, h, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, w, h);
+        }
+
+        function clearDisplay() {
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 128, 64);
+        }
+
+        // --- YOUR DESIGN LOGIC HERE ---
+        function drawElephant() {
+            clearDisplay();
+
+            // 1. EARS (Background)
+            // fillCircle(30, 32, 22, SSD1306_WHITE); // Left Ear
+            // fillCircle(98, 32, 22, SSD1306_WHITE); // Right Ear
+
+            // 2. HEAD (Middle)
+            // fillCircle(64, 32, 28, S  SD1306_WHITE);
+
+            // 3. EYES (Foreground)
+            // Left Eye
+            fillCircle(50, 26, 7, SSD1306_WHITE); 
+            fillCircle(48, 23, 2, SSD1306_BLACK); // Shine
+
+            // Right Eye
+            fillCircle(78, 26, 7, SSD1306_WHITE); 
+            fillCircle(76, 23, 2, SSD1306_BLACK); // Shine
+
+            // 4. TRUNK (The tricky part!)
+            
+            // Segment 1 (Top)
+            fillCircle(64, 42, 6, SSD1306_WHITE);
+            // Outline logic: Draw black circle, then erase top half
+            drawCircle(64, 42, 6, SSD1306_BLACK);
+            fillRect(58, 36, 12, 7, SSD1306_WHITE); 
+
+            // Segment 2 (Middle)
+            fillCircle(64, 50, 5, SSD1306_WHITE);
+            drawCircle(64, 50, 5, SSD1306_BLACK);
+
+            // Segment 3 (Tip)
+            fillCircle(68, 57, 4, SSD1306_WHITE);
+            drawCircle(68, 57, 4, SSD1306_BLACK);
+        }
+
+        // Render immediately
+        drawElephant();
+
+    </script>
+</body>
+</html>
